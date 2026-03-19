@@ -1,0 +1,29 @@
+# Assignment working/output folder
+23I-0655-23I-0524-C/
+23I-0655*/
+
+# Java build artifacts
+bin/
+out/
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE/editor artifacts
+.vscode/
+.idea/
+*.iml
+
+# Generated reports/archives
+*.zip
+*.pdf
