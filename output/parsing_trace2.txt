@@ -1,0 +1,18 @@
+Grammar: grammar1
+Input file: grammar1_edge_cases.txt
+Line 2: a b b
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ Second First                       a b b $                             Start -> First Second
+2      $ Second a                           a b b $                             First -> a
+3      $ Second                             a b b $                             Match a
+4      $ b                                  b b $                               Second -> b
+5      $                                    b b $                               Match b
+6      $                                    b $                                 ERROR: skip input token 'b'
+7      $                                    $                                   Accept
+
+Errors:
+Line 2, Col 3 -> Unexpected extra input. Expected: [$] but found: 'b'
+
+Result: Rejected/Recovered

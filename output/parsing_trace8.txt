@@ -1,0 +1,25 @@
+Grammar: grammar2
+Input file: grammar2_edge_cases.txt
+Line 2: ( id )
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ ExprPrime Term                     ( id ) $                            Expr -> Term ExprPrime
+2      $ ExprPrime TermPrime Factor         ( id ) $                            Term -> Factor TermPrime
+3      $ ExprPrime TermPrime ) Expr (       ( id ) $                            Factor -> ( Expr )
+4      $ ExprPrime TermPrime ) Expr         ( id ) $                            Match (
+5      $ ExprPrime TermPrime ) ExprPrime Term id ) $                              Expr -> Term ExprPrime
+6      $ ExprPrime TermPrime ) ExprPrime TermPrime Factor id ) $                              Term -> Factor TermPrime
+7      $ ExprPrime TermPrime ) ExprPrime TermPrime id id ) $                              Factor -> id
+8      $ ExprPrime TermPrime ) ExprPrime TermPrime id ) $                              Match id
+9      $ ExprPrime TermPrime ) ExprPrime    ) $                                 TermPrime -> epsilon
+10     $ ExprPrime TermPrime )              ) $                                 ExprPrime -> epsilon
+11     $ ExprPrime TermPrime                ) $                                 Match )
+12     $ ExprPrime                          $                                   TermPrime -> epsilon
+13     $                                    $                                   ExprPrime -> epsilon
+14     $                                    $                                   Accept
+
+Errors:
+
+
+Result: Accepted

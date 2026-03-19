@@ -1,0 +1,35 @@
+Grammar: grammar2
+Input file: grammar2_valid.txt
+Line 2: ( id + id ) * id
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ ExprPrime Term                     ( id + id ) * id $                  Expr -> Term ExprPrime
+2      $ ExprPrime TermPrime Factor         ( id + id ) * id $                  Term -> Factor TermPrime
+3      $ ExprPrime TermPrime ) Expr (       ( id + id ) * id $                  Factor -> ( Expr )
+4      $ ExprPrime TermPrime ) Expr         ( id + id ) * id $                  Match (
+5      $ ExprPrime TermPrime ) ExprPrime Term id + id ) * id $                    Expr -> Term ExprPrime
+6      $ ExprPrime TermPrime ) ExprPrime TermPrime Factor id + id ) * id $                    Term -> Factor TermPrime
+7      $ ExprPrime TermPrime ) ExprPrime TermPrime id id + id ) * id $                    Factor -> id
+8      $ ExprPrime TermPrime ) ExprPrime TermPrime id + id ) * id $                    Match id
+9      $ ExprPrime TermPrime ) ExprPrime    + id ) * id $                       TermPrime -> epsilon
+10     $ ExprPrime TermPrime ) ExprPrime Term + + id ) * id $                       ExprPrime -> + Term ExprPrime
+11     $ ExprPrime TermPrime ) ExprPrime Term + id ) * id $                       Match +
+12     $ ExprPrime TermPrime ) ExprPrime TermPrime Factor id ) * id $                         Term -> Factor TermPrime
+13     $ ExprPrime TermPrime ) ExprPrime TermPrime id id ) * id $                         Factor -> id
+14     $ ExprPrime TermPrime ) ExprPrime TermPrime id ) * id $                         Match id
+15     $ ExprPrime TermPrime ) ExprPrime    ) * id $                            TermPrime -> epsilon
+16     $ ExprPrime TermPrime )              ) * id $                            ExprPrime -> epsilon
+17     $ ExprPrime TermPrime                ) * id $                            Match )
+18     $ ExprPrime TermPrime Factor *       * id $                              TermPrime -> * Factor TermPrime
+19     $ ExprPrime TermPrime Factor         * id $                              Match *
+20     $ ExprPrime TermPrime id             id $                                Factor -> id
+21     $ ExprPrime TermPrime                id $                                Match id
+22     $ ExprPrime                          $                                   TermPrime -> epsilon
+23     $                                    $                                   ExprPrime -> epsilon
+24     $                                    $                                   Accept
+
+Errors:
+
+
+Result: Accepted

@@ -1,0 +1,14 @@
+Grammar: grammar3
+Input file: grammar3_valid.txt
+Line 1: a
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ a                                  a $                                 Stmt -> a
+2      $                                    a $                                 Match a
+3      $                                    $                                   Accept
+
+Errors:
+
+
+Result: Accepted

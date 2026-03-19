@@ -1,0 +1,72 @@
+Assignment 02 - Grammar Transformations
+Generated: 2026-03-19 20:11:58
+======================================================================
+Team: Muhammad Fatik (23I-0655, Section C), Muhammad Kaleem Akhtar (23I-0524, Section C)
+
+======================== grammar1 ========================
+Original Grammar:
+Start -> First Second
+First -> a | epsilon
+Second -> b
+
+After Left Factoring:
+Start -> First Second
+First -> a | epsilon
+Second -> b
+
+After Left Recursion Removal:
+Start -> First Second
+First -> a | epsilon
+Second -> b
+
+
+======================== grammar2 ========================
+Original Grammar:
+Expr -> Expr + Term | Term
+Term -> Term * Factor | Factor
+Factor -> ( Expr ) | id
+
+After Left Factoring:
+Expr -> Expr + Term | Term
+Term -> Term * Factor | Factor
+Factor -> ( Expr ) | id
+
+After Left Recursion Removal:
+Expr -> Term ExprPrime
+Term -> Factor TermPrime
+Factor -> ( Expr ) | id
+ExprPrime -> + Term ExprPrime | epsilon
+TermPrime -> * Factor TermPrime | epsilon
+
+
+======================== grammar3 ========================
+Original Grammar:
+Stmt -> if Cond then Stmt else Stmt | if Cond then Stmt | a
+Cond -> b
+
+After Left Factoring:
+Stmt -> a | if Cond then Stmt StmtPrime
+Cond -> b
+StmtPrime -> else Stmt | epsilon
+
+After Left Recursion Removal:
+Stmt -> a | if Cond then Stmt StmtPrime
+Cond -> b
+StmtPrime -> else Stmt | epsilon
+
+
+======================== grammar4 ========================
+Original Grammar:
+Start -> Alpha a | b
+Alpha -> Alpha c | Start d | epsilon
+
+After Left Factoring:
+Start -> Alpha a | b
+Alpha -> Alpha c | Start d | epsilon
+
+After Left Recursion Removal:
+Start -> Alpha a | b
+Alpha -> b d AlphaPrime | AlphaPrime
+AlphaPrime -> c AlphaPrime | a d AlphaPrime | epsilon
+
+

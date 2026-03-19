@@ -1,0 +1,288 @@
+Assignment 02 - Parse Trees
+Generated: 2026-03-19 20:11:58
+======================================================================
+Team: Muhammad Fatik (23I-0655, Section C), Muhammad Kaleem Akhtar (23I-0524, Section C)
+
+======================== grammar1 ========================
+Input: b
+└── Start
+    ├── First
+    │   └── epsilon
+    └── Second
+        └── b
+
+Preorder: [Start, First, epsilon, Second, b]
+Postorder: [epsilon, First, b, Second, Start]
+
+Input: a b
+└── Start
+    ├── First
+    │   └── a
+    └── Second
+        └── b
+
+Preorder: [Start, First, a, Second, b]
+Postorder: [a, First, b, Second, Start]
+
+Input: b
+└── Start
+    ├── First
+    │   └── epsilon
+    └── Second
+        └── b
+
+Preorder: [Start, First, epsilon, Second, b]
+Postorder: [epsilon, First, b, Second, Start]
+
+======================== grammar2 ========================
+Input: ( id )
+└── Expr
+    ├── Term
+    │   ├── Factor
+    │   │   ├── (
+    │   │   ├── Expr
+    │   │   │   ├── Term
+    │   │   │   │   ├── Factor
+    │   │   │   │   │   └── id
+    │   │   │   │   └── TermPrime
+    │   │   │   │       └── epsilon
+    │   │   │   └── ExprPrime
+    │   │   │       └── epsilon
+    │   │   └── )
+    │   └── TermPrime
+    │       └── epsilon
+    └── ExprPrime
+        └── epsilon
+
+Preorder: [Expr, Term, Factor, (, Expr, Term, Factor, id, TermPrime, epsilon, ExprPrime, epsilon, ), TermPrime, epsilon, ExprPrime, epsilon]
+Postorder: [(, id, Factor, epsilon, TermPrime, Term, epsilon, ExprPrime, Expr, ), Factor, epsilon, TermPrime, Term, epsilon, ExprPrime, Expr]
+
+Input: id + id + id
+└── Expr
+    ├── Term
+    │   ├── Factor
+    │   │   └── id
+    │   └── TermPrime
+    │       └── epsilon
+    └── ExprPrime
+        ├── +
+        ├── Term
+        │   ├── Factor
+        │   │   └── id
+        │   └── TermPrime
+        │       └── epsilon
+        └── ExprPrime
+            ├── +
+            ├── Term
+            │   ├── Factor
+            │   │   └── id
+            │   └── TermPrime
+            │       └── epsilon
+            └── ExprPrime
+                └── epsilon
+
+Preorder: [Expr, Term, Factor, id, TermPrime, epsilon, ExprPrime, +, Term, Factor, id, TermPrime, epsilon, ExprPrime, +, Term, Factor, id, TermPrime, epsilon, ExprPrime, epsilon]
+Postorder: [id, Factor, epsilon, TermPrime, Term, +, id, Factor, epsilon, TermPrime, Term, +, id, Factor, epsilon, TermPrime, Term, epsilon, ExprPrime, ExprPrime, ExprPrime, Expr]
+
+Input: id + id * id
+└── Expr
+    ├── Term
+    │   ├── Factor
+    │   │   └── id
+    │   └── TermPrime
+    │       └── epsilon
+    └── ExprPrime
+        ├── +
+        ├── Term
+        │   ├── Factor
+        │   │   └── id
+        │   └── TermPrime
+        │       ├── *
+        │       ├── Factor
+        │       │   └── id
+        │       └── TermPrime
+        │           └── epsilon
+        └── ExprPrime
+            └── epsilon
+
+Preorder: [Expr, Term, Factor, id, TermPrime, epsilon, ExprPrime, +, Term, Factor, id, TermPrime, *, Factor, id, TermPrime, epsilon, ExprPrime, epsilon]
+Postorder: [id, Factor, epsilon, TermPrime, Term, +, id, Factor, *, id, Factor, epsilon, TermPrime, TermPrime, Term, epsilon, ExprPrime, ExprPrime, Expr]
+
+Input: ( id + id ) * id
+└── Expr
+    ├── Term
+    │   ├── Factor
+    │   │   ├── (
+    │   │   ├── Expr
+    │   │   │   ├── Term
+    │   │   │   │   ├── Factor
+    │   │   │   │   │   └── id
+    │   │   │   │   └── TermPrime
+    │   │   │   │       └── epsilon
+    │   │   │   └── ExprPrime
+    │   │   │       ├── +
+    │   │   │       ├── Term
+    │   │   │       │   ├── Factor
+    │   │   │       │   │   └── id
+    │   │   │       │   └── TermPrime
+    │   │   │       │       └── epsilon
+    │   │   │       └── ExprPrime
+    │   │   │           └── epsilon
+    │   │   └── )
+    │   └── TermPrime
+    │       ├── *
+    │       ├── Factor
+    │       │   └── id
+    │       └── TermPrime
+    │           └── epsilon
+    └── ExprPrime
+        └── epsilon
+
+Preorder: [Expr, Term, Factor, (, Expr, Term, Factor, id, TermPrime, epsilon, ExprPrime, +, Term, Factor, id, TermPrime, epsilon, ExprPrime, epsilon, ), TermPrime, *, Factor, id, TermPrime, epsilon, ExprPrime, epsilon]
+Postorder: [(, id, Factor, epsilon, TermPrime, Term, +, id, Factor, epsilon, TermPrime, Term, epsilon, ExprPrime, ExprPrime, Expr, ), Factor, *, id, Factor, epsilon, TermPrime, TermPrime, Term, epsilon, ExprPrime, Expr]
+
+Input: id * id + id
+└── Expr
+    ├── Term
+    │   ├── Factor
+    │   │   └── id
+    │   └── TermPrime
+    │       ├── *
+    │       ├── Factor
+    │       │   └── id
+    │       └── TermPrime
+    │           └── epsilon
+    └── ExprPrime
+        ├── +
+        ├── Term
+        │   ├── Factor
+        │   │   └── id
+        │   └── TermPrime
+        │       └── epsilon
+        └── ExprPrime
+            └── epsilon
+
+Preorder: [Expr, Term, Factor, id, TermPrime, *, Factor, id, TermPrime, epsilon, ExprPrime, +, Term, Factor, id, TermPrime, epsilon, ExprPrime, epsilon]
+Postorder: [id, Factor, *, id, Factor, epsilon, TermPrime, TermPrime, Term, +, id, Factor, epsilon, TermPrime, Term, epsilon, ExprPrime, ExprPrime, Expr]
+
+Input: id
+└── Expr
+    ├── Term
+    │   ├── Factor
+    │   │   └── id
+    │   └── TermPrime
+    │       └── epsilon
+    └── ExprPrime
+        └── epsilon
+
+Preorder: [Expr, Term, Factor, id, TermPrime, epsilon, ExprPrime, epsilon]
+Postorder: [id, Factor, epsilon, TermPrime, Term, epsilon, ExprPrime, Expr]
+
+======================== grammar3 ========================
+Input: if b then if b then a
+└── Stmt
+    ├── if
+    ├── Cond
+    │   └── b
+    ├── then
+    ├── Stmt
+    │   ├── if
+    │   ├── Cond
+    │   │   └── b
+    │   ├── then
+    │   ├── Stmt
+    │   │   └── a
+    │   └── StmtPrime
+    │       └── epsilon
+    └── StmtPrime
+        └── epsilon
+
+Preorder: [Stmt, if, Cond, b, then, Stmt, if, Cond, b, then, Stmt, a, StmtPrime, epsilon, StmtPrime, epsilon]
+Postorder: [if, b, Cond, then, if, b, Cond, then, a, Stmt, epsilon, StmtPrime, Stmt, epsilon, StmtPrime, Stmt]
+
+Input: if b then a else if b then a else a
+└── Stmt
+    ├── if
+    ├── Cond
+    │   └── b
+    ├── then
+    ├── Stmt
+    │   └── a
+    └── StmtPrime
+        ├── else
+        └── Stmt
+            ├── if
+            ├── Cond
+            │   └── b
+            ├── then
+            ├── Stmt
+            │   └── a
+            └── StmtPrime
+                ├── else
+                └── Stmt
+                    └── a
+
+Preorder: [Stmt, if, Cond, b, then, Stmt, a, StmtPrime, else, Stmt, if, Cond, b, then, Stmt, a, StmtPrime, else, Stmt, a]
+Postorder: [if, b, Cond, then, a, Stmt, else, if, b, Cond, then, a, Stmt, else, a, Stmt, StmtPrime, Stmt, StmtPrime, Stmt]
+
+Input: a
+└── Stmt
+    └── a
+
+Preorder: [Stmt, a]
+Postorder: [a, Stmt]
+
+Input: if b then a
+└── Stmt
+    ├── if
+    ├── Cond
+    │   └── b
+    ├── then
+    ├── Stmt
+    │   └── a
+    └── StmtPrime
+        └── epsilon
+
+Preorder: [Stmt, if, Cond, b, then, Stmt, a, StmtPrime, epsilon]
+Postorder: [if, b, Cond, then, a, Stmt, epsilon, StmtPrime, Stmt]
+
+Input: if b then a else a
+└── Stmt
+    ├── if
+    ├── Cond
+    │   └── b
+    ├── then
+    ├── Stmt
+    │   └── a
+    └── StmtPrime
+        ├── else
+        └── Stmt
+            └── a
+
+Preorder: [Stmt, if, Cond, b, then, Stmt, a, StmtPrime, else, Stmt, a]
+Postorder: [if, b, Cond, then, a, Stmt, else, a, Stmt, StmtPrime, Stmt]
+
+Input: if b then if b then a else a
+└── Stmt
+    ├── if
+    ├── Cond
+    │   └── b
+    ├── then
+    ├── Stmt
+    │   ├── if
+    │   ├── Cond
+    │   │   └── b
+    │   ├── then
+    │   ├── Stmt
+    │   │   └── a
+    │   └── StmtPrime
+    │       ├── else
+    │       └── Stmt
+    │           └── a
+    └── StmtPrime
+        └── epsilon
+
+Preorder: [Stmt, if, Cond, b, then, Stmt, if, Cond, b, then, Stmt, a, StmtPrime, else, Stmt, a, StmtPrime, epsilon]
+Postorder: [if, b, Cond, then, if, b, Cond, then, a, Stmt, else, a, Stmt, StmtPrime, Stmt, epsilon, StmtPrime, Stmt]
+
+======================== grammar4 ========================

@@ -1,0 +1,56 @@
+Assignment 02 - LL(1) Parsing Tables
+Generated: 2026-03-19 20:11:58
+======================================================================
+Team: Muhammad Fatik (23I-0655, Section C), Muhammad Kaleem Akhtar (23I-0524, Section C)
+
+======================== grammar1 ========================
+LL(1) Parsing Table
+===============================================================
+NonTerminal     | a                         | b                         | $                         
+---------------------------------------------------------------------------------------------------------
+Start           | Start -> First Second     | Start -> First Second     |                           
+First           | First -> a                | First -> epsilon          |                           
+Second          |                           | Second -> b               |                           
+
+Grammar LL(1): YES
+
+======================== grammar2 ========================
+LL(1) Parsing Table
+===============================================================
+NonTerminal     | (                         | )                         | id                        | +                         | *                         | $                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Expr            | Expr -> Term ExprPrime    |                           | Expr -> Term ExprPrime    |                           |                           |                           
+Term            | Term -> Factor TermPrime  |                           | Term -> Factor TermPrime  |                           |                           |                           
+Factor          | Factor -> ( Expr )        |                           | Factor -> id              |                           |                           |                           
+ExprPrime       |                           | ExprPrime -> epsilon      |                           | ExprPrime -> + Term ExprPrime|                           | ExprPrime -> epsilon      
+TermPrime       |                           | TermPrime -> epsilon      |                           | TermPrime -> epsilon      | TermPrime -> * Factor TermPrime| TermPrime -> epsilon      
+
+Grammar LL(1): YES
+
+======================== grammar3 ========================
+LL(1) Parsing Table
+===============================================================
+NonTerminal     | a                         | if                        | then                      | b                         | else                      | $                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Stmt            | Stmt -> a                 | Stmt -> if Cond then Stmt StmtPrime|                           |                           |                           |                           
+Cond            |                           |                           |                           | Cond -> b                 |                           |                           
+StmtPrime       |                           |                           |                           |                           | StmtPrime -> else Stmt    | StmtPrime -> epsilon      
+
+Grammar LL(1): NO
+Conflicts:
+ - Conflict at M[StmtPrime, else] : StmtPrime -> else Stmt  vs  StmtPrime -> epsilon
+
+======================== grammar4 ========================
+LL(1) Parsing Table
+===============================================================
+NonTerminal     | a                         | b                         | d                         | c                         | $                         
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Start           | Start -> Alpha a          | Start -> Alpha a          |                           | Start -> Alpha a          |                           
+Alpha           | Alpha -> AlphaPrime       | Alpha -> b d AlphaPrime   |                           | Alpha -> AlphaPrime       |                           
+AlphaPrime      | AlphaPrime -> a d AlphaPrime|                           |                           | AlphaPrime -> c AlphaPrime|                           
+
+Grammar LL(1): NO
+Conflicts:
+ - Conflict at M[Start, b] : Start -> Alpha a  vs  Start -> b
+ - Conflict at M[AlphaPrime, a] : AlphaPrime -> a d AlphaPrime  vs  AlphaPrime -> epsilon
+

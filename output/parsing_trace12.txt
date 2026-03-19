@@ -1,0 +1,19 @@
+Grammar: grammar2
+Input file: grammar2_errors.txt
+Line 3: id )
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ ExprPrime Term                     id ) $                              Expr -> Term ExprPrime
+2      $ ExprPrime TermPrime Factor         id ) $                              Term -> Factor TermPrime
+3      $ ExprPrime TermPrime id             id ) $                              Factor -> id
+4      $ ExprPrime TermPrime                id ) $                              Match id
+5      $ ExprPrime                          ) $                                 TermPrime -> epsilon
+6      $                                    ) $                                 ExprPrime -> epsilon
+7      $                                    ) $                                 ERROR: skip input token ')'
+8      $                                    $                                   Accept
+
+Errors:
+Line 3, Col 2 -> Unexpected extra input. Expected: [$] but found: ')'
+
+Result: Rejected/Recovered

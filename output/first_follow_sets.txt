@@ -1,0 +1,61 @@
+Assignment 02 - FIRST/FOLLOW Sets
+Generated: 2026-03-19 20:11:58
+======================================================================
+Team: Muhammad Fatik (23I-0655, Section C), Muhammad Kaleem Akhtar (23I-0524, Section C)
+
+======================== grammar1 ========================
+FIRST Sets
+==============================
+FIRST(Start)       : [a, b]
+FIRST(First)       : [a, epsilon]
+FIRST(Second)      : [b]
+
+FOLLOW Sets
+==============================
+FOLLOW(Start)      : [$]
+FOLLOW(First)      : [b]
+FOLLOW(Second)     : [$]
+
+======================== grammar2 ========================
+FIRST Sets
+==============================
+FIRST(Expr)        : [(, id]
+FIRST(Term)        : [(, id]
+FIRST(Factor)      : [(, id]
+FIRST(ExprPrime)   : [+, epsilon]
+FIRST(TermPrime)   : [*, epsilon]
+
+FOLLOW Sets
+==============================
+FOLLOW(Expr)       : [$, )]
+FOLLOW(Term)       : [+, $, )]
+FOLLOW(Factor)     : [*, +, $, )]
+FOLLOW(ExprPrime)  : [$, )]
+FOLLOW(TermPrime)  : [+, $, )]
+
+======================== grammar3 ========================
+FIRST Sets
+==============================
+FIRST(Stmt)        : [a, if]
+FIRST(Cond)        : [b]
+FIRST(StmtPrime)   : [else, epsilon]
+
+FOLLOW Sets
+==============================
+FOLLOW(Stmt)       : [$, else]
+FOLLOW(Cond)       : [then]
+FOLLOW(StmtPrime)  : [$, else]
+
+======================== grammar4 ========================
+FIRST Sets
+==============================
+FIRST(Start)       : [b, c, a]
+FIRST(Alpha)       : [b, c, a, epsilon]
+FIRST(AlphaPrime)  : [c, a, epsilon]
+
+FOLLOW Sets
+==============================
+FOLLOW(Start)      : [$]
+FOLLOW(Alpha)      : [a]
+FOLLOW(AlphaPrime) : [a]
+

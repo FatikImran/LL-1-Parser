@@ -1,0 +1,17 @@
+Grammar: grammar1
+Input file: grammar1_valid.txt
+Line 1: a b
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ Second First                       a b $                               Start -> First Second
+2      $ Second a                           a b $                               First -> a
+3      $ Second                             a b $                               Match a
+4      $ b                                  b $                                 Second -> b
+5      $                                    b $                                 Match b
+6      $                                    $                                   Accept
+
+Errors:
+
+
+Result: Accepted

@@ -1,0 +1,22 @@
+Grammar: grammar3
+Input file: grammar3_errors.txt
+Line 3: if b then else a
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ StmtPrime Stmt then Cond if        if b then else a $                  Stmt -> if Cond then Stmt StmtPrime
+2      $ StmtPrime Stmt then Cond           if b then else a $                  Match if
+3      $ StmtPrime Stmt then b              b then else a $                     Cond -> b
+4      $ StmtPrime Stmt then                b then else a $                     Match b
+5      $ StmtPrime Stmt                     then else a $                       Match then
+6      $ StmtPrime Stmt                     else a $                            ERROR: pop non-terminal 'Stmt' (sync by FOLLOW)
+7      $ Stmt else                          else a $                            StmtPrime -> else Stmt
+8      $ Stmt                               else a $                            Match else
+9      $ a                                  a $                                 Stmt -> a
+10     $                                    a $                                 Match a
+11     $                                    $                                   Accept
+
+Errors:
+Line 3, Col 4 -> Empty table entry. Expected: [a, if] but found: 'else'
+
+Result: Rejected/Recovered

@@ -1,0 +1,19 @@
+Grammar: grammar3
+Input file: grammar3_errors.txt
+Line 1: if then a
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ StmtPrime Stmt then Cond if        if then a $                         Stmt -> if Cond then Stmt StmtPrime
+2      $ StmtPrime Stmt then Cond           if then a $                         Match if
+3      $ StmtPrime Stmt then Cond           then a $                            ERROR: pop non-terminal 'Cond' (sync by FOLLOW)
+4      $ StmtPrime Stmt                     then a $                            Match then
+5      $ StmtPrime a                        a $                                 Stmt -> a
+6      $ StmtPrime                          a $                                 Match a
+7      $                                    $                                   StmtPrime -> epsilon
+8      $                                    $                                   Accept
+
+Errors:
+Line 1, Col 2 -> Empty table entry. Expected: [b] but found: 'then'
+
+Result: Rejected/Recovered

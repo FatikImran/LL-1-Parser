@@ -1,0 +1,30 @@
+Grammar: grammar2
+Input file: grammar2_edge_cases.txt
+Line 3: id + id + id
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ ExprPrime Term                     id + id + id $                      Expr -> Term ExprPrime
+2      $ ExprPrime TermPrime Factor         id + id + id $                      Term -> Factor TermPrime
+3      $ ExprPrime TermPrime id             id + id + id $                      Factor -> id
+4      $ ExprPrime TermPrime                id + id + id $                      Match id
+5      $ ExprPrime                          + id + id $                         TermPrime -> epsilon
+6      $ ExprPrime Term +                   + id + id $                         ExprPrime -> + Term ExprPrime
+7      $ ExprPrime Term                     + id + id $                         Match +
+8      $ ExprPrime TermPrime Factor         id + id $                           Term -> Factor TermPrime
+9      $ ExprPrime TermPrime id             id + id $                           Factor -> id
+10     $ ExprPrime TermPrime                id + id $                           Match id
+11     $ ExprPrime                          + id $                              TermPrime -> epsilon
+12     $ ExprPrime Term +                   + id $                              ExprPrime -> + Term ExprPrime
+13     $ ExprPrime Term                     + id $                              Match +
+14     $ ExprPrime TermPrime Factor         id $                                Term -> Factor TermPrime
+15     $ ExprPrime TermPrime id             id $                                Factor -> id
+16     $ ExprPrime TermPrime                id $                                Match id
+17     $ ExprPrime                          $                                   TermPrime -> epsilon
+18     $                                    $                                   ExprPrime -> epsilon
+19     $                                    $                                   Accept
+
+Errors:
+
+
+Result: Accepted

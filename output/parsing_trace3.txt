@@ -1,0 +1,18 @@
+Grammar: grammar1
+Input file: grammar1_errors.txt
+Line 1: a a
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ Second First                       a a $                               Start -> First Second
+2      $ Second a                           a a $                               First -> a
+3      $ Second                             a a $                               Match a
+4      $ Second                             a $                                 ERROR: skip input token 'a' (panic mode)
+5      $ Second                             $                                   ERROR: pop non-terminal 'Second' (sync by FOLLOW)
+6      $                                    $                                   Accept
+
+Errors:
+Line 1, Col 2 -> Empty table entry. Expected: [b] but found: 'a'
+Line 1, Col 3 -> Empty table entry. Expected: [b] but found: '$'
+
+Result: Rejected/Recovered

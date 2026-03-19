@@ -1,0 +1,25 @@
+Grammar: grammar2
+Input file: grammar2_errors.txt
+Line 1: id + * id
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ ExprPrime Term                     id + * id $                         Expr -> Term ExprPrime
+2      $ ExprPrime TermPrime Factor         id + * id $                         Term -> Factor TermPrime
+3      $ ExprPrime TermPrime id             id + * id $                         Factor -> id
+4      $ ExprPrime TermPrime                id + * id $                         Match id
+5      $ ExprPrime                          + * id $                            TermPrime -> epsilon
+6      $ ExprPrime Term +                   + * id $                            ExprPrime -> + Term ExprPrime
+7      $ ExprPrime Term                     + * id $                            Match +
+8      $ ExprPrime Term                     * id $                              ERROR: skip input token '*' (panic mode)
+9      $ ExprPrime TermPrime Factor         id $                                Term -> Factor TermPrime
+10     $ ExprPrime TermPrime id             id $                                Factor -> id
+11     $ ExprPrime TermPrime                id $                                Match id
+12     $ ExprPrime                          $                                   TermPrime -> epsilon
+13     $                                    $                                   ExprPrime -> epsilon
+14     $                                    $                                   Accept
+
+Errors:
+Line 1, Col 3 -> Empty table entry. Expected: [(, id] but found: '*'
+
+Result: Rejected/Recovered

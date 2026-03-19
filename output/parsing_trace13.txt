@@ -1,0 +1,28 @@
+Grammar: grammar2
+Input file: grammar2_valid.txt
+Line 1: id + id * id
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ ExprPrime Term                     id + id * id $                      Expr -> Term ExprPrime
+2      $ ExprPrime TermPrime Factor         id + id * id $                      Term -> Factor TermPrime
+3      $ ExprPrime TermPrime id             id + id * id $                      Factor -> id
+4      $ ExprPrime TermPrime                id + id * id $                      Match id
+5      $ ExprPrime                          + id * id $                         TermPrime -> epsilon
+6      $ ExprPrime Term +                   + id * id $                         ExprPrime -> + Term ExprPrime
+7      $ ExprPrime Term                     + id * id $                         Match +
+8      $ ExprPrime TermPrime Factor         id * id $                           Term -> Factor TermPrime
+9      $ ExprPrime TermPrime id             id * id $                           Factor -> id
+10     $ ExprPrime TermPrime                id * id $                           Match id
+11     $ ExprPrime TermPrime Factor *       * id $                              TermPrime -> * Factor TermPrime
+12     $ ExprPrime TermPrime Factor         * id $                              Match *
+13     $ ExprPrime TermPrime id             id $                                Factor -> id
+14     $ ExprPrime TermPrime                id $                                Match id
+15     $ ExprPrime                          $                                   TermPrime -> epsilon
+16     $                                    $                                   ExprPrime -> epsilon
+17     $                                    $                                   Accept
+
+Errors:
+
+
+Result: Accepted

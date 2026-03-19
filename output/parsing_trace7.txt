@@ -1,0 +1,21 @@
+Grammar: grammar2
+Input file: grammar2_edge_cases.txt
+Line 1: id *
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ ExprPrime Term                     id * $                              Expr -> Term ExprPrime
+2      $ ExprPrime TermPrime Factor         id * $                              Term -> Factor TermPrime
+3      $ ExprPrime TermPrime id             id * $                              Factor -> id
+4      $ ExprPrime TermPrime                id * $                              Match id
+5      $ ExprPrime TermPrime Factor *       * $                                 TermPrime -> * Factor TermPrime
+6      $ ExprPrime TermPrime Factor         * $                                 Match *
+7      $ ExprPrime TermPrime Factor         $                                   ERROR: pop non-terminal 'Factor' (sync by FOLLOW)
+8      $ ExprPrime                          $                                   TermPrime -> epsilon
+9      $                                    $                                   ExprPrime -> epsilon
+10     $                                    $                                   Accept
+
+Errors:
+Line 1, Col 3 -> Empty table entry. Expected: [(, id] but found: '$'
+
+Result: Rejected/Recovered

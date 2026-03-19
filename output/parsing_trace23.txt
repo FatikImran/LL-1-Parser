@@ -1,0 +1,20 @@
+Grammar: grammar3
+Input file: grammar3_valid.txt
+Line 2: if b then a
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ StmtPrime Stmt then Cond if        if b then a $                       Stmt -> if Cond then Stmt StmtPrime
+2      $ StmtPrime Stmt then Cond           if b then a $                       Match if
+3      $ StmtPrime Stmt then b              b then a $                          Cond -> b
+4      $ StmtPrime Stmt then                b then a $                          Match b
+5      $ StmtPrime Stmt                     then a $                            Match then
+6      $ StmtPrime a                        a $                                 Stmt -> a
+7      $ StmtPrime                          a $                                 Match a
+8      $                                    $                                   StmtPrime -> epsilon
+9      $                                    $                                   Accept
+
+Errors:
+
+
+Result: Accepted

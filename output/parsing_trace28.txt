@@ -1,0 +1,18 @@
+Grammar: grammar4
+Input file: grammar4_errors.txt
+Line 1: a
+
+Step   Stack                                Input                               Action
+--------------------------------------------------------------------------------------------------------------
+1      $ a Alpha                            a $                                 Start -> Alpha a
+2      $ a AlphaPrime                       a $                                 Alpha -> AlphaPrime
+3      $ a AlphaPrime d a                   a $                                 AlphaPrime -> a d AlphaPrime
+4      $ a AlphaPrime d                     a $                                 Match a
+5      $ a AlphaPrime d                     $                                   ERROR: pop terminal 'd' from stack
+6      $ a AlphaPrime                       $                                   ERROR: skip input token '$' (panic mode)
+
+Errors:
+Line 1, Col 2 -> Missing/Unexpected symbol. Expected: [d] but found: '$'
+Line 1, Col 2 -> Empty table entry. Expected: [a, c] but found: '$'
+
+Result: Rejected/Recovered
